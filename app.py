@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 import gradio as gr
+from fastapi import FastAPI
 from datasets import load_dataset
 from langchain_community.retrievers import BM25Retriever
 from langchain_core.documents import Document
@@ -98,4 +99,7 @@ with gr.Blocks(title='Agentic RAG Document Assistant') as demo:
     build.click(index_docs, [mode, files], [state, status])
     ask.click(answer, [question, state], [response, evidence])
 
-demo.queue().launch()
+app = gr.mount_gradio_app(FastAPI(), demo.queue(), path="/")
+
+if __name__ == "__main__":
+    demo.launch()
