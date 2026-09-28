@@ -12,6 +12,10 @@ pinned: false
 
 A Gradio application adapted from [Hugging Face's smolagents RAG notebook](https://colab.research.google.com/github/huggingface/notebooks/blob/main/smolagents_doc/en/rag.ipynb). It indexes the `m-ric/huggingface_doc` Transformers documentation or uploaded PDF/TXT/Markdown documents, splits them into passages, retrieves with BM25, and lets a smolagents `CodeAgent` refine searches and answer questions. The relevant retrieved passages are shown separately.
 
+## Vercel deployment
+
+Vercel imports the top-level ASGI `app` exported by `app.py`. Set `HF_TOKEN` in Vercel environment variables to enable model-generated answers. This demo keeps indexes in process memory; sessions and large documentation downloads may not persist reliably across serverless instances. For sustained document indexing, deploy the Gradio application to Hugging Face Spaces or add persistent storage.
+
 ## Run locally
 
 ```bash
